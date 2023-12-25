@@ -14,6 +14,12 @@ protocol UsersViewModelProtocol: ViewModel {
   /// Selects an item from Datasource
   /// - Parameter indexPath: indexPath of  Item
   func selectItem(at indexPath: IndexPath) -> User
+
+  /// Adds a user to the database
+  func addUser(user: User)
+
+  /// Generates session number
+  func generateSessionCode(userIds: [String]) -> String
 }
 
 final class UsersViewModel: ViewModel {
@@ -21,7 +27,7 @@ final class UsersViewModel: ViewModel {
 
   private let userAPIService: UserApiServiceProtocol
 
-  private var userList: UserList = []
+  private var userList: UserList = [:]
   init(userAPIService: UserApiServiceProtocol) {
     self.userAPIService = userAPIService
   }
@@ -45,9 +51,43 @@ extension UsersViewModel: UsersViewModelProtocol {
     }
   }
 
+  func addUser(user: User) {
+    userAPIService.addUser(user: user) { result in
+      switch result {
+      case .failure:
+        print("An error accured while adding a the user data.")
+      case .success():
+        self.storeKey(user: user)
+        print("User data added successfully")
+      }
+    }
+  }
+
+  func storeKey(user: User) {
+    let password = user.userId.data(using: .utf8)!
+
+    do {
+      try KeyChainHelper.storeData(password: password)
+    } catch {
+      print(KeychainError.keySavingError.localizedDescription)
+    }
+
+  }
+
   func selectItem(at indexPath: IndexPath) -> User {
     let row = indexPath.row
-    return userList[row]
+
+    let keysArray = Array(userList.keys)
+
+    let key = keysArray[row]
+    guard let value = userList[key] else {
+      return userList.first?.value ?? User(userName: "TestUser", userId: "TestUserId")
+    }
+    return value
+  }
+
+  func generateSessionCode(userIds: [String]) -> String {
+    return userIds.joined(separator: "-")
   }
 
 }
@@ -58,14 +98,13 @@ private extension UsersViewModel {
   func generateUserTableViewCellModel(from dataSource: UserList) -> [UserTableViewCellModel] {
     dataSource.map {
       return UserTableViewCellModel(
-        avatarUrl: $0.avatarURL,
-        userName: $0.userName
+        userName: $0.value.userName
       )
     }
   }
 
   func cleanDataSource() {
-    userList = []
+    userList = [:]
   }
 
 }

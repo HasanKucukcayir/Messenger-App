@@ -37,7 +37,6 @@ final class UsersView: BaseView {
 
 // MARK: - Public
 extension UsersView {
-
   func provideDataSource(_ dataSource: [UserTableViewCellModel]) {
     self.dataSource = dataSource
     tableView.reloadData()

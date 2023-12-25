@@ -29,8 +29,7 @@ extension NetworkService {
           return
         }
         do {
-          let str = String(decoding: data, as: UTF8.self)
-          print(str)
+
           let model = try JSONDecoder().decode(D.self, from: data)
 
           completion(.success(model))

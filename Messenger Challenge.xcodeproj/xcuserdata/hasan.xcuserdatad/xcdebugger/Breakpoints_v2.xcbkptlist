@@ -7,240 +7,48 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "BE832CB5-1537-4CDD-A280-5638EB374F85"
+            uuid = "C4F588DB-4089-43E4-9AE3-35F3F1BFE113"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Messenger Challenge/Scenes/Users/View/UsersViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
-            landmarkName = "didGetUsers(dataSource:)"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
+            landmarkName = "didSelectItem(at:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "BE832CB5-1537-4CDD-A280-5638EB374F85 - 242a6cea153fe43"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Messenger_Challenge.UsersViewController.didGetUsers(dataSource: Swift.Array&lt;Messenger_Challenge.UserTableViewCellModel&gt;) -&gt; ()"
-                  moduleName = "Messenger Challenge"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/hasan/Desktop/Messenger%20Challenge/Messenger%20Challenge/Scenes/Users/View/UsersViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "60"
-                  endingLineNumber = "60"
-                  offsetFromSymbolStart = "204">
-               </Location>
-               <Location
-                  uuid = "BE832CB5-1537-4CDD-A280-5638EB374F85 - 86330d0fafb22591"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 @Swift.MainActor () -&gt; () in Messenger_Challenge.UsersViewController.didGetUsers(dataSource: Swift.Array&lt;Messenger_Challenge.UserTableViewCellModel&gt;) -&gt; ()"
-                  moduleName = "Messenger Challenge"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/hasan/Desktop/Messenger%20Challenge/Messenger%20Challenge/Scenes/Users/View/UsersViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "61"
-                  endingLineNumber = "61"
-                  offsetFromSymbolStart = "44">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "BB05B69D-8BF7-43D8-9B91-F85D87C4A18C"
+            uuid = "07DFF4DE-69AE-4697-8E50-71E2983D2CBA"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Messenger Challenge/Scenes/Users/View/UsersViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
-            landmarkName = "didFailForGettingUsers()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "BB05B69D-8BF7-43D8-9B91-F85D87C4A18C - 64f0063d56a28a8"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Messenger_Challenge.UsersViewController.didFailForGettingUsers() -&gt; ()"
-                  moduleName = "Messenger Challenge"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/hasan/Desktop/Messenger%20Challenge/Messenger%20Challenge/Scenes/Users/View/UsersViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "66"
-                  endingLineNumber = "66"
-                  offsetFromSymbolStart = "188">
-               </Location>
-               <Location
-                  uuid = "BB05B69D-8BF7-43D8-9B91-F85D87C4A18C - 44a71a3bb61e6099"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 @Swift.MainActor () -&gt; () in Messenger_Challenge.UsersViewController.didFailForGettingUsers() -&gt; ()"
-                  moduleName = "Messenger Challenge"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/hasan/Desktop/Messenger%20Challenge/Messenger%20Challenge/Scenes/Users/View/UsersViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "67"
-                  endingLineNumber = "67"
-                  offsetFromSymbolStart = "84">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "562F01F0-AD6F-4949-938A-0805D16EB2FC"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Messenger Challenge/Services/NetworkService/NetworkService.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
-            landmarkName = "requestPlain(target:completion:)"
+            startingLineNumber = "82"
+            endingLineNumber = "82"
+            landmarkName = "didSelectItem(at:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "A7BAD28C-21DD-46DB-9BAD-7BDF4B6F04A0"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Messenger Challenge/Scenes/Users/View/UsersViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42"
-            landmarkName = "fetchAllUsers()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "6DEB31C8-4D0B-4C58-B4DC-D40C22DE39B4"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Messenger Challenge/Scenes/Users/View/UsersViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
-            landmarkName = "fetchAllUsers()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "E3D30101-9E81-4B47-9887-5674B2D3D476"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Messenger Challenge/Services/NetworkService/Target/UserTarget.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "22"
-            endingLineNumber = "22"
-            landmarkName = "path"
-            landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "97846773-A490-464C-9960-DC96C86F0F11"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Messenger Challenge/Services/NetworkService/Models/User.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "29"
-            endingLineNumber = "29"
-            landmarkName = "==(lhs:rhs:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "5967EE24-BB1C-400C-810E-0A4E8813188E"
+            uuid = "78AF981F-D9EB-44AE-AD44-998487AEF3A3"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Messenger Challenge/Scenes/Users/View/UsersViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "61"
-            endingLineNumber = "61"
-            landmarkName = "didGetUsers(dataSource:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "B78F657C-CF64-4540-9CCA-4E75FD03D7B6"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Messenger Challenge/Scenes/Users/View/UsersView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "43"
-            endingLineNumber = "43"
-            landmarkName = "provideDataSource(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "31AE8C76-0174-46AF-ABB1-F2C579EF9C33"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Messenger Challenge/Scenes/Users/View/UsersView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42"
-            landmarkName = "provideDataSource(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "99267872-DFA5-4F3B-BC90-EC0587E94092"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Messenger Challenge/Scenes/Users/View/UsersView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
-            landmarkName = "setupConstraints()"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
+            landmarkName = "didSelectItem(at:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
