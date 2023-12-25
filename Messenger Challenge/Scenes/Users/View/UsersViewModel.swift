@@ -64,15 +64,8 @@ extension UsersViewModel: UsersViewModelProtocol {
   }
 
   func storeKey(user: User) {
-    let password = user.userId.data(using: .utf8)!
-
-    print(password)
-    do {
-      try KeyChainHelper.storeData(password: password)
-    } catch {
-      print(KeychainError.keySavingError.localizedDescription)
-    }
-
+    let userIDData = user.userId.data(using: .utf8)!
+    KeyChainHelper.storeData(password: userIDData)
   }
 
   func selectItem(at indexPath: IndexPath) -> User {

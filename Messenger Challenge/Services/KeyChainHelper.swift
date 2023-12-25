@@ -60,12 +60,10 @@ final class KeyChainHelper {
     if SecItemCopyMatching(query as CFDictionary, &item) == noErr {
 
       if let existingItem = item as? [String: Any],
-         let username = existingItem[kSecAttrAccount as String] as? String,
+         let _ = existingItem[kSecAttrAccount as String] as? String,
          let passwordData = existingItem[kSecValueData as String] as? Data,
          let password = String(data: passwordData, encoding: .utf8)
       {
-        print(username)
-        print(password)
         return password
       }
     } else {
@@ -73,6 +71,16 @@ final class KeyChainHelper {
     }
 
     return nil
+  }
+
+  func generateKey() -> String? {
+    guard let userID = KeyChainHelper.retrieveData() else {
+      return nil
+    }
+
+    let key = String(userID.dropFirst(4))
+
+    return key
   }
 
 }

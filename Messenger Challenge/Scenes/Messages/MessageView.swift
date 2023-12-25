@@ -67,6 +67,25 @@ extension MessageView {
   func provideDataSource(_ dataSource: [MessageTableViewCellModel]) {
     let sorted = dataSource.sorted { $0.text < $1.text}
     self.dataSource = sorted
+    let cryptographyManager = CryptographyManager()
+
+    let myId = KeyChainHelper.retrieveData()!
+
+    for i in 0 ..< sorted.count {
+
+      if dataSource[i].senderID == myId {
+        self.dataSource[i].text = cryptographyManager.decryptSentMessage(
+          base64EncodedString: self.dataSource[i].text)!
+      } else {
+        let id = self.dataSource[i].senderID
+        let key = cryptographyManager.generateKey(with: id)
+        self.dataSource[i].text = cryptographyManager.decryptReceivedMessage(
+          base64EncodedString: self.dataSource[i].text,
+          key: key!)!
+      }
+
+    }
+
     tableView.reloadData()
   }
 }

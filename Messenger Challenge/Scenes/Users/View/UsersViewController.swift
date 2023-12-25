@@ -87,8 +87,6 @@ extension UsersViewController {
 extension UsersViewController: UsersViewDelegate {
   func didSelectItem(at indexPath: IndexPath) {
     let receiver = viewModel.selectItem(at: indexPath)
-    print(receiver.userName)
-    print(receiver.userId)
     guard let senderUserId = KeyChainHelper.retrieveData() else {
       return
     }
@@ -96,7 +94,9 @@ extension UsersViewController: UsersViewDelegate {
     let sessionNumber = viewModel.generateSessionCode(userIds: userIds)
     let viewController = MessageViewController(view: MessageView(),
                                                viewModel: MessagesViewModel(messageApiService: MessageApiService()),
-                                               sessionNumber: sessionNumber)
+                                               sessionNumber: sessionNumber,
+                                               senderID: senderUserId,
+                                               receiverId: receiver.userId)
     navigationController?.pushViewController(viewController, animated: true)
   }
 

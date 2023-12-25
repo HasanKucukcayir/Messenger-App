@@ -67,7 +67,9 @@ private extension MessagesViewModel {
   func generateMessageTableViewCellModel(from dataSource: MessageList) -> [MessageTableViewCellModel] {
     dataSource.map {
       return MessageTableViewCellModel(
-        text: $0.value.text
+        text: $0.value.text,
+        senderID: $0.value.sender,
+        receiverId: $0.value.receiver
       )
     }
   }

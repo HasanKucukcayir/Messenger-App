@@ -17,11 +17,20 @@ final class MessageViewController: BaseViewController {
   private let viewModel: MessagesViewModelProtocol
 
   var sessionNumber: String
+  var senderID: String
+  var receiverId: String
+  let cryptographyManager = CryptographyManager()
 
-  init(view: MessageView, viewModel: MessagesViewModel, sessionNumber: String) {
+  init(view: MessageView,
+       viewModel: MessagesViewModel,
+       sessionNumber: String,
+       senderID: String,
+       receiverId: String) {
     self.mainView = view
     self.viewModel = viewModel
     self.sessionNumber = sessionNumber
+    self.senderID = senderID
+    self.receiverId = receiverId
     super.init(nibName: nil, bundle: nil)
     viewModel.delegate = self
   }
@@ -95,17 +104,20 @@ private extension MessageViewController {
 // MARK: - UsersViewModelDelegate
 extension MessageViewController: MessageViewDelegate {
   func sendButtonTapped(_ text: String?) {
-    guard let message = text else { return }
+    guard let encryptedData = cryptographyManager.encrypt(dataString: text ?? "test") else {
+      return
+    }
 
     viewModel.addMessage(sessionNumber: sessionNumber,
-                         message: Message(sender: "Hasan",
-                                          receiver: "TestUser",
-                                          text: message))
+                         message: Message(sender: senderID,
+                                          receiver: receiverId,
+                                          text: encryptedData
+                                         ))
 
     DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
       self.viewModel.fetchAllMessages(sessionNumber: self.sessionNumber)
     }
-    
+
   }
 }
 

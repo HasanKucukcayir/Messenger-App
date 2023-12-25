@@ -83,5 +83,7 @@ private extension MessageTableViewCell {
 }
 
 struct MessageTableViewCellModel {
-  let text: String
+  var text: String
+  var senderID: String
+  var receiverId: String
 }
