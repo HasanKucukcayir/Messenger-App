@@ -99,4 +99,5 @@ private extension UserTableViewCell {
 
 struct UserTableViewCellModel {
   let userName: String?
+  let userId: String?
 }

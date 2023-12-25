@@ -42,6 +42,11 @@ final class UsersViewController: BaseViewController {
                                                         style: .plain,
                                                         target: self,
                                                         action: #selector(addTapped))
+
+    navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Refresh",
+                                                        style: .plain,
+                                                        target: self,
+                                                        action: #selector(refreshButtonTapped))
   }
 
 }
@@ -72,12 +77,18 @@ extension UsersViewController {
     present(alert, animated: true, completion: nil)
   }
 
+  @objc func refreshButtonTapped() {
+    viewModel.fetchAllUsers()
+  }
+
 }
 
 // MARK: - UsersViewDelegate
 extension UsersViewController: UsersViewDelegate {
   func didSelectItem(at indexPath: IndexPath) {
     let receiver = viewModel.selectItem(at: indexPath)
+    print(receiver.userName)
+    print(receiver.userId)
     guard let senderUserId = KeyChainHelper.retrieveData() else {
       return
     }

@@ -101,6 +101,11 @@ extension MessageViewController: MessageViewDelegate {
                          message: Message(sender: "Hasan",
                                           receiver: "TestUser",
                                           text: message))
+
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+      self.viewModel.fetchAllMessages(sessionNumber: self.sessionNumber)
+    }
+    
   }
 }
 

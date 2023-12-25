@@ -8,22 +8,41 @@
 import Security
 import Foundation
 
-class KeyChainHelper {
+final class KeyChainHelper {
 
-  static func storeData(password: Data) throws {
+  static func storeData(password: Data) {
     let userName = "MessengerApp"
     let query: [String: Any] = [
-        kSecClass as String: kSecClassGenericPassword,
-        kSecAttrAccount as String: userName,
-        kSecValueData as String: password,
+      kSecClass as String: kSecClassGenericPassword,
+      kSecAttrAccount as String: userName,
+      kSecValueData as String: password,
     ]
 
-    let status = SecItemAdd(query as CFDictionary, nil)
+    _ = SecItemAdd(query as CFDictionary, nil)
 
-    guard status == errSecSuccess else {
-      throw KeychainError.keySavingError
+    if SecItemAdd(query as CFDictionary, nil) == noErr {
+      print("User saved successfully in the keychain")
+    } else {
+      print("Something went wrong trying to save the user in the keychain")
+      update(password: password)
     }
 
+  }
+
+  static func update(password: Data) {
+    let userName = "MessengerApp"
+    let query: [String: Any] = [
+      kSecClass as String: kSecClassGenericPassword,
+      kSecAttrAccount as String: userName,
+    ]
+
+    let attributes: [String: Any] = [kSecValueData as String: password]
+
+    if SecItemUpdate(query as CFDictionary, attributes as CFDictionary) == noErr {
+      print("Password has changed")
+    } else {
+      print("Something went wrong trying to update the password")
+    }
   }
 
   static func retrieveData() -> String? {

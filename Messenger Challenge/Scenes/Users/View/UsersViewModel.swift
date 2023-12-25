@@ -44,8 +44,8 @@ extension UsersViewModel: UsersViewModelProtocol {
         self.delegate?.didFailForGettingUsers()
 
       case .success(let userList):
-        self.userList = userList
-        let dataSource = self.generateUserTableViewCellModel(from: userList)
+        self.userList = self.filterCurrentUserName(userList: userList)
+        let dataSource = self.generateUserTableViewCellModel(from: self.userList)
         self.delegate?.didGetUsers(dataSource: dataSource)
       }
     }
@@ -66,6 +66,7 @@ extension UsersViewModel: UsersViewModelProtocol {
   func storeKey(user: User) {
     let password = user.userId.data(using: .utf8)!
 
+    print(password)
     do {
       try KeyChainHelper.storeData(password: password)
     } catch {
@@ -87,7 +88,7 @@ extension UsersViewModel: UsersViewModelProtocol {
   }
 
   func generateSessionCode(userIds: [String]) -> String {
-    return userIds.joined(separator: "-")
+    return userIds.joined(separator: "*")
   }
 
 }
@@ -98,9 +99,20 @@ private extension UsersViewModel {
   func generateUserTableViewCellModel(from dataSource: UserList) -> [UserTableViewCellModel] {
     dataSource.map {
       return UserTableViewCellModel(
-        userName: $0.value.userName
+        userName: $0.value.userName,
+        userId: $0.value.userId
       )
     }
+  }
+
+  func filterCurrentUserName(userList: UserList) -> UserList {
+    guard let userID = KeyChainHelper.retrieveData() else {
+      return UserList()
+    }
+
+    let filtered = userList.filter { $0.value.userId != userID }
+
+    return filtered
   }
 
   func cleanDataSource() {

@@ -22,7 +22,7 @@ final class MessageView: BaseView {
                        forCellReuseIdentifier: MessageTableViewCell.identifier)
     tableView.dataSource = self
     tableView.rowHeight = 50
-    tableView.separatorStyle = .singleLine
+    tableView.separatorStyle = .none
     return tableView
   }()
 
@@ -65,7 +65,8 @@ final class MessageView: BaseView {
 // MARK: - Public
 extension MessageView {
   func provideDataSource(_ dataSource: [MessageTableViewCellModel]) {
-    self.dataSource = dataSource
+    let sorted = dataSource.sorted { $0.text < $1.text}
+    self.dataSource = sorted
     tableView.reloadData()
   }
 }
