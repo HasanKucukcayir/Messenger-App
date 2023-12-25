@@ -8,6 +8,7 @@
 import Foundation
 
 typealias Parameters = [String : Any]
+
 protocol NetworkTarget {
   var baseURL: URL { get }
   var path: String { get }

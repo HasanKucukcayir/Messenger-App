@@ -1,34 +1,36 @@
 //
-//  UserTarget.swift
+//  MessageTarget.swift
 //  Messenger Challenge
 //
-//  Created by Hasan on 24/12/2023.
+//  Created by Hasan on 25/12/2023.
 //
 
 import Foundation
 
-enum UserTarget {
-  case user
-  case addUser(User)
+enum MessageTarget {
+  case message(String)
+  case addMessage(Message, String)
 }
 
-extension UserTarget: NetworkTarget {
+extension MessageTarget: NetworkTarget {
   var baseURL: URL {
     URL(string: "https://messenger-3d9c1-default-rtdb.europe-west1.firebasedatabase.app/")!
   }
 
   var path: String {
     switch self {
-    case .user, .addUser:
-      return "users.json"
+    case let .addMessage(_, sessionNumber):
+      return "messages/\(sessionNumber).json"
+    case let .message(sessionNumber):
+      return "messages/\(sessionNumber).json"
     }
   }
 
   var methodType: MethodType {
     switch self {
-    case .user:
+    case .message:
       return .get
-    case .addUser:
+    case .addMessage:
       return .post
     }
   }
@@ -39,13 +41,14 @@ extension UserTarget: NetworkTarget {
 
   var workType: WorkType {
     switch self {
-    case .user:
+    case .message:
       return .requestPlain
 
-    case let .addUser(user):
+    case let .addMessage(message, _):
       let paramaters: Parameters = [
-        "userName": user.userName,
-        "userId": user.userId
+        "text": message.text,
+        "sender": message.sender,
+        "receiver": message.receiver,
       ]
 
       return .requestWithBodyParameters(parameters: paramaters)

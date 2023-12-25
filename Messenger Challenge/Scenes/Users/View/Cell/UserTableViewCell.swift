@@ -98,6 +98,6 @@ private extension UserTableViewCell {
 }
 
 struct UserTableViewCellModel {
-  let avatarUrl: URL?
   let userName: String?
+  let userId: String?
 }

@@ -12,11 +12,7 @@ protocol UsersViewModelDelegate: UIViewController {
   func didFailForGettingUsers()
 }
 
-final class UsersViewController: BaseViewController, ViewControllerProtocol{
-
-  typealias ViewModelType = UsersViewModel
-  typealias ViewType = UsersView
-
+final class UsersViewController: BaseViewController {
   private let mainView: UsersView
   private let viewModel: UsersViewModelProtocol
 
@@ -39,6 +35,49 @@ final class UsersViewController: BaseViewController, ViewControllerProtocol{
 
   override func viewDidLoad() {
     super.viewDidLoad()
+
+    viewModel.fetchAllUsers()
+
+    navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add",
+                                                        style: .plain,
+                                                        target: self,
+                                                        action: #selector(addTapped))
+
+    navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Refresh",
+                                                        style: .plain,
+                                                        target: self,
+                                                        action: #selector(refreshButtonTapped))
+  }
+
+}
+
+// MARK: - Actions
+extension UsersViewController {
+  @objc func addTapped() {
+    let alert = UIAlertController(title: "Add User",
+                                  message: nil,
+                                  preferredStyle: .alert)
+
+    alert.addTextField()
+
+    alert.addAction(UIAlertAction(title: "OK",
+                                  style: .default,
+                                  handler: { [weak alert] (_) in
+      let textField = alert?.textFields![0]
+      let key = UUID().uuidString
+      self.viewModel.addUser(user: User(userName: textField?.text ?? "User",
+                                        userId: key))
+      
+      DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+        self.viewModel.fetchAllUsers()
+      }
+
+    }))
+
+    present(alert, animated: true, completion: nil)
+  }
+
+  @objc func refreshButtonTapped() {
     viewModel.fetchAllUsers()
   }
 
@@ -46,10 +85,19 @@ final class UsersViewController: BaseViewController, ViewControllerProtocol{
 
 // MARK: - UsersViewDelegate
 extension UsersViewController: UsersViewDelegate {
-
   func didSelectItem(at indexPath: IndexPath) {
-    // TODO: use this value for getting messages
-    let user = viewModel.selectItem(at: indexPath)
+    let receiver = viewModel.selectItem(at: indexPath)
+    guard let senderUserId = KeyChainHelper.retrieveData() else {
+      return
+    }
+    let userIds = [senderUserId, receiver.userId].sorted()
+    let sessionNumber = viewModel.generateSessionCode(userIds: userIds)
+    let viewController = MessageViewController(view: MessageView(),
+                                               viewModel: MessagesViewModel(messageApiService: MessageApiService()),
+                                               sessionNumber: sessionNumber,
+                                               senderID: senderUserId,
+                                               receiverId: receiver.userId)
+    navigationController?.pushViewController(viewController, animated: true)
   }
 
 }

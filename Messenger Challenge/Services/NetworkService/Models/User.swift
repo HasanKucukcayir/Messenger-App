@@ -7,17 +7,15 @@
 
 import Foundation
 
-typealias UserList = [User]
+typealias UserList = [String: User]
 
 // MARK: - User
 struct User: Codable {
   let userName: String
-  let userNumber: String
-  let avatarURL: URL?
+  let userId: String
 
   enum CodingKeys: String, CodingKey {
-    case userName, userNumber
-    case avatarURL = "avatarURL"
+    case userName, userId
   }
 
 }
@@ -26,7 +24,6 @@ struct User: Codable {
 extension User: Equatable {
   static func == (lhs: User, rhs: User) -> Bool {
     lhs.userName == rhs.userName &&
-    lhs.userNumber == rhs.userNumber &&
-    lhs.avatarURL == rhs.avatarURL
+    lhs.userId == rhs.userId
   }
 }
