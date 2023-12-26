@@ -20,6 +20,7 @@ final class MessagesViewModel: ViewModel {
   weak var delegate: MessagesViewModelDelegate?
 
   private let messageAPIService: MessageApiServiceProtocol
+  private let cryptographyManager = CryptographyManager()
 
   private var messageList: MessageList = [:]
   init(messageApiService: MessageApiServiceProtocol) {
@@ -41,7 +42,10 @@ extension MessagesViewModel: MessagesViewModelProtocol {
       case .success(let messageList):
         self.messageList = messageList
         let dataSource = self.generateMessageTableViewCellModel(from: messageList)
-        self.delegate?.didGetMessages(dataSource: dataSource)
+
+        let resolvedDataSource = self.resolveMessages(dataSource: dataSource)
+
+        self.delegate?.didGetMessages(dataSource: resolvedDataSource)
       }
     }
   }
@@ -77,4 +81,31 @@ private extension MessagesViewModel {
   func cleanDataSource() {
     messageList = [:]
   }
+
+  func resolveMessages(dataSource: [MessageTableViewCellModel]) -> [MessageTableViewCellModel] {
+
+    var sorted = dataSource.sorted { $0.text < $1.text}
+
+    let myId = KeyChainHelper.retrieveData()!
+
+    for i in 0 ..< sorted.count {
+
+      let text = sorted[i].text
+
+      if dataSource[i].senderID == myId {
+        sorted[i].text = cryptographyManager.decryptSentMessage(
+          base64EncodedString: text)!
+      } else {
+        let id = sorted[i].senderID
+        let key = cryptographyManager.generateKey(with: id)
+        sorted[i].text = cryptographyManager.decryptReceivedMessage(
+          base64EncodedString: text,
+          key: key!)!
+      }
+
+    }
+
+    return sorted
+  }
+
 }

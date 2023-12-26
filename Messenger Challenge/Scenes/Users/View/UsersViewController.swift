@@ -60,6 +60,7 @@ extension UsersViewController {
 
     alert.addTextField()
 
+    alert.addAction(.init(title: "Cancel", style: .destructive))
     alert.addAction(UIAlertAction(title: "OK",
                                   style: .default,
                                   handler: { [weak alert] (_) in
