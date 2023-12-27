@@ -9,17 +9,16 @@ import Foundation
 @testable import MessengerChallenge
 
 final class UserApiServiceSpy: NetworkService<UserTarget>, UserApiServiceProtocol {
-
   var providedDataSource: UserList!
 
   var isFailingActive: Bool = false
   var isSuccessfull: Bool = false
 
-  func fetchAllUsers(completion: @escaping (Result<UserList, NetworkError>) -> Void) {
+  func fetchAllUsers() async -> Result<MessengerChallenge.UserList, MessengerChallenge.NetworkError> {
     if isFailingActive {
-      completion(.failure(.unknown))
+      return .failure(.unknown)
     } else {
-      completion(.success(providedDataSource))
+      return .success(providedDataSource)
     }
   }
 

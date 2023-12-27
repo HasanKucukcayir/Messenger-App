@@ -15,35 +15,37 @@ extension NetworkService {
   /// Makes a request for a Decodable Response
   /// - Parameters:
   ///   - target: TargetType to be targeted
-  ///   - completion: Result with Success(Expected Decodable Object Type) or Failure(NetworkError)
-  func request<D: Decodable>(target: T, completion: @escaping (Result<D, NetworkError>) -> Void) {
-    DispatchQueue.global(qos: .userInitiated).async {
-      let request = self.prepareRequest(from: target)
-      URLSession.shared.dataTask(with: request) { (data, response, error) in
-        guard response != nil, let data = data else {
-          if let error = error {
-            completion(.failure(.sessionError(error)))
-          } else {
-            completion(.failure(.unknown))
+  @MainActor
+  func request<D: Decodable>(target: T) async throws -> D {
+    return try await withCheckedThrowingContinuation { continuation in
+        let request = self.prepareRequest(from: target)
+
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+          guard response != nil, let data1 = data else {
+            if let error = error {
+              continuation.resume(with: .failure(NetworkError.sessionError(error)))
+            } else {
+              continuation.resume(with: .failure(NetworkError.unknown))
+            }
+            return
           }
-          return
-        }
-        do {
+          do {
 
-          let model = try JSONDecoder().decode(D.self, from: data)
+            let model = try JSONDecoder().decode(D.self, from: data1)
 
-          completion(.success(model))
-        } catch {
-          completion(.failure(.decodingError(error)))
-        }
-      }.resume()
+            continuation.resume(with: .success(model))
+          } catch {
+            continuation.resume(with: .failure(NetworkError
+              .decodingError(error)))
+          }
+        }.resume()
+
     }
   }
 
   /// Makes a request
   /// - Parameters:
   ///   - target: TargetType to be targeted
-  ///   - completion: Result with Success(Void) or Failure(NetworkError)
   func requestPlain(target: T, completion: @escaping (Result<Void, NetworkError>) -> Void) {
     DispatchQueue.global(qos: .userInitiated).async {
       let request = self.prepareRequest(from: target)
