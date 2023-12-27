@@ -67,7 +67,7 @@ final class KeyChainHelper {
         return password
       }
     } else {
-      print("Something went wrong trying to find the key in the keychain")
+      print("No user key found in the keychain. Please add a user.")
     }
 
     return nil

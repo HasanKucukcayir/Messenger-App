@@ -6,7 +6,7 @@
 //
 
 import Foundation
-@testable import Messenger_Challenge
+@testable import MessengerChallenge
 
 final class UserApiServiceSpy: NetworkService<UserTarget>, UserApiServiceProtocol {
 
