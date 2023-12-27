@@ -38,7 +38,20 @@
 		9F7EF92D2B3978F200E650D7 /* KeyChainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7EF92C2B3978F200E650D7 /* KeyChainHelper.swift */; };
 		9F7EF92F2B397CF400E650D7 /* KeychainError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7EF92E2B397CF400E650D7 /* KeychainError.swift */; };
 		9F7EF9322B39B62000E650D7 /* CryptographyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7EF9312B39B62000E650D7 /* CryptographyManager.swift */; };
+		9FEBCC9E2B3B4C7500F69FFA /* UserApiServiceSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FEBCC9D2B3B4C7500F69FFA /* UserApiServiceSpy.swift */; };
+		9FEBCCA02B3B9C4100F69FFA /* UsersViewModelDelegateSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FEBCC9F2B3B9C4100F69FFA /* UsersViewModelDelegateSpy.swift */; };
+		9FEBCCA22B3B9E5700F69FFA /* UsersViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FEBCCA12B3B9E5700F69FFA /* UsersViewModelTests.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		9FEBCC922B3B48BB00F69FFA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9F7EF8C22B378C7A00E650D7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9F7EF8C92B378C7A00E650D7;
+			remoteInfo = "Messenger Challenge";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		9F7EF8CA2B378C7A00E650D7 /* Messenger Challenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Messenger Challenge.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -74,10 +87,21 @@
 		9F7EF92C2B3978F200E650D7 /* KeyChainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainHelper.swift; sourceTree = "<group>"; };
 		9F7EF92E2B397CF400E650D7 /* KeychainError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainError.swift; sourceTree = "<group>"; };
 		9F7EF9312B39B62000E650D7 /* CryptographyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptographyManager.swift; sourceTree = "<group>"; };
+		9FEBCC8E2B3B48BA00F69FFA /* MessengerChallengeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MessengerChallengeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9FEBCC9D2B3B4C7500F69FFA /* UserApiServiceSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserApiServiceSpy.swift; sourceTree = "<group>"; };
+		9FEBCC9F2B3B9C4100F69FFA /* UsersViewModelDelegateSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersViewModelDelegateSpy.swift; sourceTree = "<group>"; };
+		9FEBCCA12B3B9E5700F69FFA /* UsersViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersViewModelTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		9F7EF8C72B378C7A00E650D7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9FEBCC8B2B3B48BA00F69FFA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -91,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				9F7EF8CC2B378C7A00E650D7 /* Messenger Challenge */,
+				9FEBCC8F2B3B48BB00F69FFA /* MessengerChallengeTests */,
 				9F7EF8CB2B378C7A00E650D7 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -99,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				9F7EF8CA2B378C7A00E650D7 /* Messenger Challenge.app */,
+				9FEBCC8E2B3B48BA00F69FFA /* MessengerChallengeTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -286,6 +312,40 @@
 			path = Cryptography;
 			sourceTree = "<group>";
 		};
+		9FEBCC8F2B3B48BB00F69FFA /* MessengerChallengeTests */ = {
+			isa = PBXGroup;
+			children = (
+				9FEBCC972B3B4AF500F69FFA /* Spies */,
+				9FEBCC982B3B4B0800F69FFA /* Scene */,
+			);
+			path = MessengerChallengeTests;
+			sourceTree = "<group>";
+		};
+		9FEBCC972B3B4AF500F69FFA /* Spies */ = {
+			isa = PBXGroup;
+			children = (
+				9FEBCC9D2B3B4C7500F69FFA /* UserApiServiceSpy.swift */,
+				9FEBCC9F2B3B9C4100F69FFA /* UsersViewModelDelegateSpy.swift */,
+			);
+			path = Spies;
+			sourceTree = "<group>";
+		};
+		9FEBCC982B3B4B0800F69FFA /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				9FEBCC9A2B3B4BD900F69FFA /* Users */,
+			);
+			path = Scene;
+			sourceTree = "<group>";
+		};
+		9FEBCC9A2B3B4BD900F69FFA /* Users */ = {
+			isa = PBXGroup;
+			children = (
+				9FEBCCA12B3B9E5700F69FFA /* UsersViewModelTests.swift */,
+			);
+			path = Users;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -306,6 +366,24 @@
 			productReference = 9F7EF8CA2B378C7A00E650D7 /* Messenger Challenge.app */;
 			productType = "com.apple.product-type.application";
 		};
+		9FEBCC8D2B3B48BA00F69FFA /* MessengerChallengeTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9FEBCC962B3B48BB00F69FFA /* Build configuration list for PBXNativeTarget "MessengerChallengeTests" */;
+			buildPhases = (
+				9FEBCC8A2B3B48BA00F69FFA /* Sources */,
+				9FEBCC8B2B3B48BA00F69FFA /* Frameworks */,
+				9FEBCC8C2B3B48BA00F69FFA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9FEBCC932B3B48BB00F69FFA /* PBXTargetDependency */,
+			);
+			name = MessengerChallengeTests;
+			productName = MessengerChallengeTests;
+			productReference = 9FEBCC8E2B3B48BA00F69FFA /* MessengerChallengeTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -318,6 +396,11 @@
 				TargetAttributes = {
 					9F7EF8C92B378C7A00E650D7 = {
 						CreatedOnToolsVersion = 14.1;
+					};
+					9FEBCC8D2B3B48BA00F69FFA = {
+						CreatedOnToolsVersion = 14.1;
+						LastSwiftMigration = 1410;
+						TestTargetID = 9F7EF8C92B378C7A00E650D7;
 					};
 				};
 			};
@@ -335,6 +418,7 @@
 			projectRoot = "";
 			targets = (
 				9F7EF8C92B378C7A00E650D7 /* Messenger Challenge */,
+				9FEBCC8D2B3B48BA00F69FFA /* MessengerChallengeTests */,
 			);
 		};
 /* End PBXProject section */
@@ -346,6 +430,13 @@
 			files = (
 				9F7EF8D72B378C7D00E650D7 /* Assets.xcassets in Resources */,
 				9F7EF9082B386A0A00E650D7 /* Colors.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9FEBCC8C2B3B48BA00F69FFA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -388,7 +479,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9FEBCC8A2B3B48BA00F69FFA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9FEBCC9E2B3B4C7500F69FFA /* UserApiServiceSpy.swift in Sources */,
+				9FEBCCA22B3B9E5700F69FFA /* UsersViewModelTests.swift in Sources */,
+				9FEBCCA02B3B9C4100F69FFA /* UsersViewModelDelegateSpy.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		9FEBCC932B3B48BB00F69FFA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9F7EF8C92B378C7A00E650D7 /* Messenger Challenge */;
+			targetProxy = 9FEBCC922B3B48BB00F69FFA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		9F7EF8DC2B378C7D00E650D7 /* Debug */ = {
@@ -563,6 +672,57 @@
 			};
 			name = Release;
 		};
+		9FEBCC942B3B48BB00F69FFA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 8DHZB5GQW8;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hkucukcayir.MessengerChallengeTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Messenger Challenge.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Messenger Challenge";
+			};
+			name = Debug;
+		};
+		9FEBCC952B3B48BB00F69FFA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 8DHZB5GQW8;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hkucukcayir.MessengerChallengeTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Messenger Challenge.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Messenger Challenge";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -580,6 +740,15 @@
 			buildConfigurations = (
 				9F7EF8DF2B378C7D00E650D7 /* Debug */,
 				9F7EF8E02B378C7D00E650D7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9FEBCC962B3B48BB00F69FFA /* Build configuration list for PBXNativeTarget "MessengerChallengeTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9FEBCC942B3B48BB00F69FFA /* Debug */,
+				9FEBCC952B3B48BB00F69FFA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
