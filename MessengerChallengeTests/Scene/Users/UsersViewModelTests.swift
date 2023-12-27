@@ -82,7 +82,8 @@ private extension UsersViewModelTests {
       XCTFail("DataSource amount should be equal")
       return
     }
-    compareTestDataSource(userList: testDataSource, expectedDataSource: viewControllerSpy.dataSource)
+    compareTestDataSource(userList: testDataSource,
+                          expectedDataSource: viewControllerSpy.dataSource)
   }
 
 }

@@ -54,7 +54,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		9F7EF8CA2B378C7A00E650D7 /* Messenger Challenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Messenger Challenge.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9F7EF8CA2B378C7A00E650D7 /* MessengerChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MessengerChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F7EF8CD2B378C7A00E650D7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9F7EF8CF2B378C7A00E650D7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		9F7EF8D62B378C7D00E650D7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -114,7 +114,7 @@
 		9F7EF8C12B378C7A00E650D7 = {
 			isa = PBXGroup;
 			children = (
-				9F7EF8CC2B378C7A00E650D7 /* Messenger Challenge */,
+				9F7EF8CC2B378C7A00E650D7 /* MessengerChallenge */,
 				9FEBCC8F2B3B48BB00F69FFA /* MessengerChallengeTests */,
 				9F7EF8CB2B378C7A00E650D7 /* Products */,
 			);
@@ -123,13 +123,13 @@
 		9F7EF8CB2B378C7A00E650D7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9F7EF8CA2B378C7A00E650D7 /* Messenger Challenge.app */,
+				9F7EF8CA2B378C7A00E650D7 /* MessengerChallenge.app */,
 				9FEBCC8E2B3B48BA00F69FFA /* MessengerChallengeTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		9F7EF8CC2B378C7A00E650D7 /* Messenger Challenge */ = {
+		9F7EF8CC2B378C7A00E650D7 /* MessengerChallenge */ = {
 			isa = PBXGroup;
 			children = (
 				9F7EF9302B39B30700E650D7 /* Cryptography */,
@@ -140,7 +140,7 @@
 				9F7EF8F52B38503700E650D7 /* Extensions */,
 				9F7EF9002B38628400E650D7 /* Util */,
 			);
-			path = "Messenger Challenge";
+			path = MessengerChallenge;
 			sourceTree = "<group>";
 		};
 		9F7EF8E42B37A37E00E650D7 /* Architecture */ = {
@@ -349,9 +349,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		9F7EF8C92B378C7A00E650D7 /* Messenger Challenge */ = {
+		9F7EF8C92B378C7A00E650D7 /* MessengerChallenge */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9F7EF8DE2B378C7D00E650D7 /* Build configuration list for PBXNativeTarget "Messenger Challenge" */;
+			buildConfigurationList = 9F7EF8DE2B378C7D00E650D7 /* Build configuration list for PBXNativeTarget "MessengerChallenge" */;
 			buildPhases = (
 				9F7EF8C62B378C7A00E650D7 /* Sources */,
 				9F7EF8C72B378C7A00E650D7 /* Frameworks */,
@@ -361,9 +361,9 @@
 			);
 			dependencies = (
 			);
-			name = "Messenger Challenge";
+			name = MessengerChallenge;
 			productName = "Messenger Challenge";
-			productReference = 9F7EF8CA2B378C7A00E650D7 /* Messenger Challenge.app */;
+			productReference = 9F7EF8CA2B378C7A00E650D7 /* MessengerChallenge.app */;
 			productType = "com.apple.product-type.application";
 		};
 		9FEBCC8D2B3B48BA00F69FFA /* MessengerChallengeTests */ = {
@@ -404,7 +404,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 9F7EF8C52B378C7A00E650D7 /* Build configuration list for PBXProject "Messenger Challenge" */;
+			buildConfigurationList = 9F7EF8C52B378C7A00E650D7 /* Build configuration list for PBXProject "MessengerChallenge" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -417,7 +417,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				9F7EF8C92B378C7A00E650D7 /* Messenger Challenge */,
+				9F7EF8C92B378C7A00E650D7 /* MessengerChallenge */,
 				9FEBCC8D2B3B48BA00F69FFA /* MessengerChallengeTests */,
 			);
 		};
@@ -494,7 +494,7 @@
 /* Begin PBXTargetDependency section */
 		9FEBCC932B3B48BB00F69FFA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 9F7EF8C92B378C7A00E650D7 /* Messenger Challenge */;
+			target = 9F7EF8C92B378C7A00E650D7 /* MessengerChallenge */;
 			targetProxy = 9FEBCC922B3B48BB00F69FFA /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -623,9 +623,9 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 986PSV4D2J;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Messenger Challenge/Infrastructure/Info.plist";
+				INFOPLIST_FILE = MessengerChallenge/Infrastructure/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchStoryboardName = "";
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -652,9 +652,9 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 986PSV4D2J;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Messenger Challenge/Infrastructure/Info.plist";
+				INFOPLIST_FILE = MessengerChallenge/Infrastructure/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchStoryboardName = "";
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -694,7 +694,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Messenger Challenge.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Messenger Challenge";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MessengerChallenge.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MessengerChallenge";
 			};
 			name = Debug;
 		};
@@ -719,14 +719,14 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Messenger Challenge.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Messenger Challenge";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MessengerChallenge.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MessengerChallenge";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		9F7EF8C52B378C7A00E650D7 /* Build configuration list for PBXProject "Messenger Challenge" */ = {
+		9F7EF8C52B378C7A00E650D7 /* Build configuration list for PBXProject "MessengerChallenge" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9F7EF8DC2B378C7D00E650D7 /* Debug */,
@@ -735,7 +735,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9F7EF8DE2B378C7D00E650D7 /* Build configuration list for PBXNativeTarget "Messenger Challenge" */ = {
+		9F7EF8DE2B378C7D00E650D7 /* Build configuration list for PBXNativeTarget "MessengerChallenge" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9F7EF8DF2B378C7D00E650D7 /* Debug */,
