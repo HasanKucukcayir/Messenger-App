@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable import Messenger_Challenge
+@testable import MessengerChallenge
 
 final class UsersViewModelDelegateSpy: UIViewController, UsersViewModelDelegate {
   var didFailForGettingUsersExpectation: XCTestExpectation!

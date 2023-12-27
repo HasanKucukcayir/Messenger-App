@@ -34,7 +34,10 @@ extension MessagesViewModel: MessagesViewModelProtocol {
 
   func fetchAllMessages(sessionNumber: String) {
     cleanDataSource()
-    messageAPIService.fetchAllMessages(sessionNumber: sessionNumber) { result in
+
+    Task {
+      let result = await messageAPIService.fetchAllMessages(sessionNumber: sessionNumber)
+
       switch result {
       case .failure:
         self.delegate?.didFailForGettingMessages()

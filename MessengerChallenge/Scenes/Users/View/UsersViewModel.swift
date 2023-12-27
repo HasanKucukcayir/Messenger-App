@@ -36,9 +36,12 @@ final class UsersViewModel: ViewModel {
 
 // MARK: - UsersViewModelProtocol
 extension UsersViewModel: UsersViewModelProtocol {
+
   func fetchAllUsers() {
     cleanDataSource()
-    userAPIService.fetchAllUsers { result in
+    Task {
+      let result = await userAPIService.fetchAllUsers()
+
       switch result {
       case .failure:
         self.delegate?.didFailForGettingUsers()
