@@ -73,7 +73,8 @@ extension MessageView {
 // MARK: - UITableViewDataSource
 extension MessageView: UITextFieldDelegate{
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-    messageInputField.becomeFirstResponder()
+    messageInputField.resignFirstResponder()
+    return true
   }
 
 }
