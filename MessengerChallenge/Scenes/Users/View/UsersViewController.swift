@@ -36,12 +36,16 @@ final class UsersViewController: BaseViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    viewModel.fetchAllUsers()
+    if let _ = KeyChainHelper.retrieveData() {
+      viewModel.fetchAllUsers()
+    } else {
+      showUserEntryAlert()
+    }
 
     navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add",
                                                         style: .plain,
                                                         target: self,
-                                                        action: #selector(addTapped))
+                                                        action: #selector(showUserEntryAlert))
 
     navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Refresh",
                                                         style: .plain,
@@ -53,29 +57,31 @@ final class UsersViewController: BaseViewController {
 
 // MARK: - Actions
 extension UsersViewController {
-  @objc func addTapped() {
-    let alert = UIAlertController(title: "Add User",
-                                  message: nil,
-                                  preferredStyle: .alert)
+  @objc func showUserEntryAlert() {
+    DispatchQueue.main.async {
+      let alert = UIAlertController(title: "Add User",
+                                    message: nil,
+                                    preferredStyle: .alert)
 
-    alert.addTextField()
+      alert.addTextField()
 
-    alert.addAction(.init(title: "Cancel", style: .destructive))
-    alert.addAction(UIAlertAction(title: "OK",
-                                  style: .default,
-                                  handler: { [weak alert] (_) in
-      let textField = alert?.textFields![0]
-      let key = UUID().uuidString
-      self.viewModel.addUser(user: User(userName: textField?.text ?? "User",
-                                        userId: key))
-      
-      DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-        self.viewModel.fetchAllUsers()
-      }
+      alert.addAction(.init(title: "Cancel", style: .destructive))
+      alert.addAction(UIAlertAction(title: "OK",
+                                    style: .default,
+                                    handler: { [weak alert] (_) in
+        let textField = alert?.textFields![0]
+        let key = UUID().uuidString
+        self.viewModel.addUser(user: User(userName: textField?.text ?? "User",
+                                          userId: key))
 
-    }))
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+          self.viewModel.fetchAllUsers()
+        }
 
-    present(alert, animated: true, completion: nil)
+      }))
+
+      self.present(alert, animated: true, completion: nil)
+    }
   }
 
   @objc func refreshButtonTapped() {
