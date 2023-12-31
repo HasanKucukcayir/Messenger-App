@@ -12,7 +12,7 @@ protocol UserApiServiceProtocol {
   /// - Parameter completion: Result with Success(User) or Failure(NetworkError)
   func fetchAllUsers() async -> Result<UserList, NetworkError>
 
-  func addUser(user: User, completion: @escaping (Result<Void, NetworkError>) -> Void)
+  func addUser(user: User) async -> (Result<Void, NetworkError>)
 }
 
 
@@ -21,6 +21,7 @@ final class UserApiService: NetworkService<UserTarget> { }
 
 // MARK: - UserApiServiceProtocol
 extension UserApiService: UserApiServiceProtocol {
+  
   func fetchAllUsers() async -> Result<UserList, NetworkError> {
     do {
       let result: UserList = try await request(target: .user)
@@ -31,9 +32,13 @@ extension UserApiService: UserApiServiceProtocol {
 
   }
 
-  func addUser(user: User, completion: @escaping (Result<Void, NetworkError>) -> Void) {
-    requestPlain(target: .addUser(user),
-                 completion: completion)
+  func addUser(user: User) async -> (Result<Void, NetworkError>) {
+    do {
+      try await requestPlain(target: .addUser(user))
+      return .success(())
+    } catch(let error) {
+      return .failure(error as! NetworkError)
+    }
   }
 
 }

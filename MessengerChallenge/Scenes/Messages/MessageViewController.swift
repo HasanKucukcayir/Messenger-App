@@ -19,7 +19,6 @@ final class MessageViewController: BaseViewController {
   var sessionNumber: String
   var senderID: String
   var receiverId: String
-  let cryptographyManager = CryptographyManager()
 
   init(view: MessageView,
        viewModel: MessagesViewModel,
@@ -104,7 +103,12 @@ private extension MessageViewController {
 // MARK: - UsersViewModelDelegate
 extension MessageViewController: MessageViewDelegate {
   func sendButtonTapped(_ text: String?) {
-    guard let encryptedData = cryptographyManager.encrypt(dataString: text ?? "test") else {
+
+    guard let encryptedData = viewModel.encryptMessage(
+      dataString: text ?? "test",
+      senderId: senderID,
+      receiverId: receiverId
+    ) else {
       return
     }
 

@@ -12,19 +12,29 @@ protocol MessagesViewModelProtocol: ViewModel {
   /// Fetches All Messages
   func fetchAllMessages(sessionNumber: String)
 
-  /// Adds message to the database
+  /// Adds message to the firebase database
   func addMessage(sessionNumber: String, message: Message)
+
+  /// Encrypts the message before posting to database
+  func encryptMessage(dataString: String, senderId: String, receiverId: String) -> String?
 }
 
 final class MessagesViewModel: ViewModel {
   weak var delegate: MessagesViewModelDelegate?
 
   private let messageAPIService: MessageApiServiceProtocol
-  private let cryptographyManager = CryptographyManager()
+  private let keyChainHelper: KeyChainHelper
+
+  let cryptographyManager = CryptographyManager()
 
   private var messageList: MessageList = [:]
-  init(messageApiService: MessageApiServiceProtocol) {
+  
+  init(
+    messageApiService: MessageApiServiceProtocol,
+    keyChainHelper: KeyChainHelper
+  ) {
     self.messageAPIService = messageApiService
+    self.keyChainHelper = keyChainHelper
   }
 
 }
@@ -39,7 +49,11 @@ extension MessagesViewModel: MessagesViewModelProtocol {
       let result = await messageAPIService.fetchAllMessages(sessionNumber: sessionNumber)
 
       switch result {
-      case .failure:
+      case .failure(let error):
+        if error.localizedDescription == NetworkError.decodingError(error).localizedDescription {
+          return
+        }
+
         self.delegate?.didFailForGettingMessages()
 
       case .success(let messageList):
@@ -54,18 +68,38 @@ extension MessagesViewModel: MessagesViewModelProtocol {
   }
 
   func addMessage(sessionNumber: String, message: Message) {
-    messageAPIService.addMessage(sessionNumber: sessionNumber,
-                                 message: Message(sender: message.sender,
-                                                  receiver: message.receiver,
-                                                  text: message.text)) { result in
+
+    Task {
+      let result = await messageAPIService.addMessage(
+        sessionNumber: sessionNumber,
+        message: message
+      )
+
       switch result {
-      case .failure:
-        print("An error accured while adding a the user data.")
+      case .failure(let error):
+        print("An error accured while adding a the message. \(error)")
       case .success():
-        print("User data added successfully")
+        print("The message added successfully")
       }
     }
+
   }
+
+  func encryptMessage(
+    dataString: String,
+    senderId: String,
+    receiverId: String
+  ) -> String? {
+    guard let encryptedData = cryptographyManager.encrypt(
+      dataString: dataString,
+      senderId: senderId,
+      receiverId: receiverId
+    ) else {
+      return nil
+    }
+    return encryptedData
+  }
+
 
 }
 
@@ -87,23 +121,29 @@ private extension MessagesViewModel {
 
   func resolveMessages(dataSource: [MessageTableViewCellModel]) -> [MessageTableViewCellModel] {
 
-    var sorted = dataSource.sorted { $0.text < $1.text}
+    var sorted = dataSource.sorted {$0.text < $1.text}
 
-    let myId = KeyChainHelper.retrieveData()!
+    let myId = keyChainHelper.retrieveData()!
 
     for i in 0 ..< sorted.count {
+      let model = sorted[i]
 
-      let text = sorted[i].text
+      let key = cryptographyManager.generateKey(senderId: model.senderID,
+                                                receiverId: model.receiverId)
 
       if dataSource[i].senderID == myId {
-        sorted[i].text = cryptographyManager.decryptSentMessage(
-          base64EncodedString: text)!
+        if let text = cryptographyManager.decryptSentMessage(
+          base64EncodedString: model.text,
+          key: key) {
+          sorted[i].text = text
+        }
+
       } else {
-        let id = sorted[i].senderID
-        let key = cryptographyManager.generateKey(with: id)
-        sorted[i].text = cryptographyManager.decryptReceivedMessage(
-          base64EncodedString: text,
-          key: key!)!
+        if let text = cryptographyManager.decryptReceivedMessage(
+          base64EncodedString: model.text,
+          key: key) {
+          sorted[i].text = text
+        }
       }
 
     }

@@ -9,9 +9,13 @@ import Security
 import Foundation
 
 final class KeyChainHelper {
+  var userName: String
 
-  static func storeData(password: Data) {
-    let userName = "MessengerApp"
+  init(userName: String) {
+    self.userName = userName
+  }
+
+  func storeData(password: Data) {
     let query: [String: Any] = [
       kSecClass as String: kSecClassGenericPassword,
       kSecAttrAccount as String: userName,
@@ -29,8 +33,7 @@ final class KeyChainHelper {
 
   }
 
-  static func update(password: Data) {
-    let userName = "MessengerApp"
+  func update(password: Data) {
     let query: [String: Any] = [
       kSecClass as String: kSecClassGenericPassword,
       kSecAttrAccount as String: userName,
@@ -45,9 +48,7 @@ final class KeyChainHelper {
     }
   }
 
-  static func retrieveData() -> String? {
-    let userName = "MessengerApp"
-
+  func retrieveData() -> String? {
     let query: [String: Any] = [
       kSecClass as String: kSecClassGenericPassword,
       kSecAttrAccount as String: userName,
@@ -71,16 +72,6 @@ final class KeyChainHelper {
     }
 
     return nil
-  }
-
-  func generateKey() -> String? {
-    guard let userID = KeyChainHelper.retrieveData() else {
-      return nil
-    }
-
-    let key = String(userID.dropFirst(4))
-
-    return key
   }
 
 }
