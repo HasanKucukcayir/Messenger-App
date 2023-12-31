@@ -46,22 +46,24 @@ extension NetworkService {
   /// Makes a request
   /// - Parameters:
   ///   - target: TargetType to be targeted
-  func requestPlain(target: T, completion: @escaping (Result<Void, NetworkError>) -> Void) {
-    DispatchQueue.global(qos: .userInitiated).async {
+  @MainActor
+  func requestPlain(target: T) async throws {
+    return try await withCheckedThrowingContinuation { continuation in
       let request = self.prepareRequest(from: target)
+
       URLSession.shared.dataTask(with: request) { (data, response, error) in
-        guard let response = response as? HTTPURLResponse else {
+        guard let response1 = response as? HTTPURLResponse else {
           if let error = error {
-            completion(.failure(.sessionError(error)))
+            continuation.resume(with: .failure(NetworkError.sessionError(error)))
           } else {
-            completion(.failure(.unknown))
+            continuation.resume(with: .failure(NetworkError.unknown))
           }
           return
         }
-        if (200..<300).contains(response.statusCode) {
-          completion(.success(()))
+        if (200..<300).contains(response1.statusCode) {
+          continuation.resume(with: .success(()))
         } else {
-          completion(.failure(.unsucessfulStatusCode(code: response.statusCode)))
+          continuation.resume(with: .failure(NetworkError.unsucessfulStatusCode(code: response1.statusCode)))
         }
       }.resume()
     }

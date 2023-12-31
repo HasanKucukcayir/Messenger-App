@@ -28,6 +28,7 @@ final class MessagesViewModel: ViewModel {
   let cryptographyManager = CryptographyManager()
 
   private var messageList: MessageList = [:]
+  
   init(
     messageApiService: MessageApiServiceProtocol,
     keyChainHelper: KeyChainHelper
@@ -67,17 +68,21 @@ extension MessagesViewModel: MessagesViewModelProtocol {
   }
 
   func addMessage(sessionNumber: String, message: Message) {
-    messageAPIService.addMessage(sessionNumber: sessionNumber,
-                                 message: Message(sender: message.sender,
-                                                  receiver: message.receiver,
-                                                  text: message.text)) { result in
+
+    Task {
+      let result = await messageAPIService.addMessage(
+        sessionNumber: sessionNumber,
+        message: message
+      )
+
       switch result {
-      case .failure:
-        print("An error accured while adding a the user data.")
+      case .failure(let error):
+        print("An error accured while adding a the message. \(error)")
       case .success():
-        print("User data added successfully")
+        print("The message added successfully")
       }
     }
+
   }
 
   func encryptMessage(

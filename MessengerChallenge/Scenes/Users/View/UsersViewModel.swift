@@ -44,6 +44,7 @@ final class UsersViewModel: ViewModel {
 
 // MARK: - UsersViewModelProtocol
 extension UsersViewModel: UsersViewModelProtocol {
+  
   func getKeyChainHelper() -> KeyChainHelper {
     return keyChainHelper
   }
@@ -66,10 +67,12 @@ extension UsersViewModel: UsersViewModelProtocol {
   }
 
   func addUser(user: User) {
-    userAPIService.addUser(user: user) { result in
+    Task {
+      let result = await userAPIService.addUser(user: user)
+
       switch result {
-      case .failure:
-        print("An error accured while adding a the user data.")
+      case .failure(let error):
+        print("An error accured while adding a the user data. \(error)")
       case .success():
         self.storeKey(user: user)
         print("User data added successfully")
