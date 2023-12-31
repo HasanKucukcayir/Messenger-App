@@ -15,10 +15,13 @@ protocol UsersViewModelDelegate: UIViewController {
 final class UsersViewController: BaseViewController {
   private let mainView: UsersView
   private let viewModel: UsersViewModelProtocol
+  private let keyChainHelper: KeyChainHelper
 
-  init(view: UsersView, viewModel: UsersViewModel) {
+  init(view: UsersView, 
+       viewModel: UsersViewModel) {
     self.mainView = view
     self.viewModel = viewModel
+    self.keyChainHelper = viewModel.getKeyChainHelper()
     super.init(nibName: nil, bundle: nil)
     viewModel.delegate = self
   }
@@ -36,7 +39,7 @@ final class UsersViewController: BaseViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    if let _ = KeyChainHelper.retrieveData() {
+    if let _ = keyChainHelper.retrieveData() {
       viewModel.fetchAllUsers()
     } else {
       showUserEntryAlert()
@@ -59,11 +62,15 @@ final class UsersViewController: BaseViewController {
 extension UsersViewController {
   @objc func showUserEntryAlert() {
     DispatchQueue.main.async {
-      let alert = UIAlertController(title: "Add User",
-                                    message: nil,
-                                    preferredStyle: .alert)
+      let alert = UIAlertController(
+        title: "Add User",
+        message: nil,
+        preferredStyle: .alert)
 
-      alert.addTextField()
+      alert.addTextField { textField in
+        textField.placeholder = "Username"
+        textField.translatesAutoresizingMaskIntoConstraints = false
+      }
 
       alert.addAction(.init(title: "Cancel", style: .destructive))
       alert.addAction(UIAlertAction(title: "OK",
@@ -71,6 +78,7 @@ extension UsersViewController {
                                     handler: { [weak alert] (_) in
         let textField = alert?.textFields![0]
         let key = UUID().uuidString
+
         self.viewModel.addUser(user: User(userName: textField?.text ?? "User",
                                           userId: key))
 
@@ -80,7 +88,7 @@ extension UsersViewController {
 
       }))
 
-      self.present(alert, animated: true, completion: nil)
+      self.present(alert, animated: true)
     }
   }
 
@@ -94,16 +102,21 @@ extension UsersViewController {
 extension UsersViewController: UsersViewDelegate {
   func didSelectItem(at indexPath: IndexPath) {
     let receiver = viewModel.selectItem(at: indexPath)
-    guard let senderUserId = KeyChainHelper.retrieveData() else {
+    guard let senderUserId = keyChainHelper.retrieveData() else {
       return
     }
     let userIds = [senderUserId, receiver.userId].sorted()
     let sessionNumber = viewModel.generateSessionCode(userIds: userIds)
-    let viewController = MessageViewController(view: MessageView(),
-                                               viewModel: MessagesViewModel(messageApiService: MessageApiService()),
-                                               sessionNumber: sessionNumber,
-                                               senderID: senderUserId,
-                                               receiverId: receiver.userId)
+    let viewController = MessageViewController(
+      view: MessageView(),
+      viewModel: MessagesViewModel(
+        messageApiService: MessageApiService(),
+        keyChainHelper: keyChainHelper
+      ),
+      sessionNumber: sessionNumber,
+      senderID: senderUserId,
+      receiverId: receiver.userId
+    )
     navigationController?.pushViewController(viewController, animated: true)
   }
 

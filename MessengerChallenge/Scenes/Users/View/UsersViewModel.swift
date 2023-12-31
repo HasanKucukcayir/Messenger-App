@@ -20,22 +20,33 @@ protocol UsersViewModelProtocol: ViewModel {
 
   /// Generates session number
   func generateSessionCode(userIds: [String]) -> String
+
+  /// Gets key chain helper
+  func getKeyChainHelper() -> KeyChainHelper
 }
 
 final class UsersViewModel: ViewModel {
   weak var delegate: UsersViewModelDelegate?
 
   private let userAPIService: UserApiServiceProtocol
+  private let keyChainHelper: KeyChainHelper
 
   private var userList: UserList = [:]
-  init(userAPIService: UserApiServiceProtocol) {
+  init(
+    userAPIService: UserApiServiceProtocol,
+    keyChainHelper: KeyChainHelper
+  ) {
     self.userAPIService = userAPIService
+    self.keyChainHelper = keyChainHelper
   }
 
 }
 
 // MARK: - UsersViewModelProtocol
 extension UsersViewModel: UsersViewModelProtocol {
+  func getKeyChainHelper() -> KeyChainHelper {
+    return keyChainHelper
+  }
 
   func fetchAllUsers() {
     cleanDataSource()
@@ -43,7 +54,7 @@ extension UsersViewModel: UsersViewModelProtocol {
       let result = await userAPIService.fetchAllUsers()
 
       switch result {
-      case .failure:
+      case .failure(_):
         self.delegate?.didFailForGettingUsers()
 
       case .success(let userList):
@@ -68,7 +79,7 @@ extension UsersViewModel: UsersViewModelProtocol {
 
   func storeKey(user: User) {
     let userIDData = user.userId.data(using: .utf8)!
-    KeyChainHelper.storeData(password: userIDData)
+    keyChainHelper.storeData(password: userIDData)
   }
 
   func selectItem(at indexPath: IndexPath) -> User {
@@ -102,12 +113,11 @@ private extension UsersViewModel {
   }
 
   func filterCurrentUserName(userList: UserList) -> UserList {
-    guard let userID = KeyChainHelper.retrieveData() else {
+    guard let userID = keyChainHelper.retrieveData() else {
       return UserList()
     }
 
     let filtered = userList.filter { $0.value.userId != userID }
-
     return filtered
   }
 

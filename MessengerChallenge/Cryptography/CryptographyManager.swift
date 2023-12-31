@@ -7,27 +7,35 @@
 
 import Foundation
 import CommonCrypto
+import CryptoKit
 
 final class CryptographyManager {
 
-  func generateKey() -> String? {
-    guard let userID = KeyChainHelper.retrieveData() else {
-      return nil
-    }
-
-    let key = String(userID.dropFirst(4))
-
-    return key
+  private func hash(keyString: String) -> String {
+    let data = Data(keyString.utf8)
+    let digest = SHA256.hash(data: data)
+    let hashString = digest
+      .compactMap { String(format: "%02x", $0) }
+      .joined()
+    return hashString
   }
 
-  func generateKey(with id: String) -> String? {
-    let key = String(id.dropFirst(4))
+  func generateKey(senderId: String,
+                   receiverId: String) -> String {
 
-    return key
+    let keyPart1 = String(senderId.dropFirst(4))
+    let keyPart2 = String(receiverId.dropFirst(4))
+
+    let keyString = keyPart1 + keyPart2
+
+    return hash(keyString: keyString)
   }
 
-  func encrypt(dataString: String) -> String? {
-    let key: String = generateKey() ?? "testKey"
+  func encrypt(dataString: String,
+               senderId: String,
+               receiverId: String) -> String? {
+    let key: String = generateKey(senderId: senderId,
+                                  receiverId: receiverId)
     let data = dataString.data(using: .utf8)!
     let keyData = key.data(using: .utf8)!
     let inputData = data as NSData
@@ -59,7 +67,8 @@ final class CryptographyManager {
     return nil
   }
 
-  func decryptReceivedMessage(base64EncodedString: String, key: String) -> String? {
+  func decryptReceivedMessage(base64EncodedString: String,
+                              key: String) -> String? {
     let data = Data(base64Encoded: base64EncodedString)
     let keyData = key.data(using: .utf8)!
     let inputData = data! as NSData
@@ -90,9 +99,9 @@ final class CryptographyManager {
     return nil
   }
 
-  func decryptSentMessage(base64EncodedString: String) -> String? {
+  func decryptSentMessage(base64EncodedString: String,
+                          key: String) -> String? {
     let data = Data(base64Encoded: base64EncodedString)
-    let key: String = generateKey() ?? "testKey"
     let keyData = key.data(using: .utf8)!
     let inputData = data! as NSData
     let decryptedData = NSMutableData(length: Int(inputData.length) + kCCBlockSizeAES128)!

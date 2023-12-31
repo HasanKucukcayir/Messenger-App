@@ -30,7 +30,7 @@ extension MessageApiService: MessageApiServiceProtocol {
         return .success(result)
     } catch {
         // Handle errors and return as a failure
-      return .failure(NetworkError.sessionError(error))
+      return .failure(error as! NetworkError)
     }
   }
 
