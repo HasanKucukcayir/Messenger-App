@@ -9,6 +9,7 @@ import Foundation
 @testable import MessengerChallenge
 
 final class UserApiServiceSpy: NetworkService<UserTarget>, UserApiServiceProtocol {
+  
   var providedDataSource: UserList!
 
   var isFailingActive: Bool = false
@@ -22,8 +23,12 @@ final class UserApiServiceSpy: NetworkService<UserTarget>, UserApiServiceProtoco
     }
   }
 
-  func addUser(user: User, completion: @escaping (Result<Void, NetworkError>) -> Void) {
-    isSuccessfull ? completion(.success(())) : completion(.failure(.unknown))
+  func addUser(user: MessengerChallenge.User) async -> (Result<Void, MessengerChallenge.NetworkError>) {
+    if isSuccessfull {
+      return .success(())
+    } else {
+      return .failure(.unknown)
+    }
   }
 
 }
