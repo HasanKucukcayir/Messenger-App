@@ -19,7 +19,12 @@ final class UsersViewModelTests: XCTestCase {
     testDataSource = ["key1" : User(userName: "Hasan", userId: "0113H"),
                       "key2" : User(userName: "iPhone 15", userId: "0113I")]
     userAPIServiceSpy = UserApiServiceSpy()
-    sut = UsersViewModel(userAPIService: userAPIServiceSpy)
+    sut = UsersViewModel(
+      userAPIService: userAPIServiceSpy,
+      keyChainHelper: KeyChainHelper(
+        userName: "MessengerApp"
+      )
+    )
     viewControllerSpy = UsersViewModelDelegateSpy()
     sut.delegate = viewControllerSpy
   }
